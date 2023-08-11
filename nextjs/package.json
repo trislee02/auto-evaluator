@@ -36,7 +36,8 @@
     "react-hook-form": "^7.43.9",
     "react-spinners": "^0.13.8",
     "remark": "^14.0.2",
-    "remark-html": "^15.0.1"
+    "remark-html": "^15.0.1",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@types/node": "18.15.10",
