@@ -258,7 +258,7 @@ def run_evaluator(
         file_index = random.randint(0, len(fnames)-1)
         text = texts[file_index]
 
-        doc_chunk_size = 500 # Size in characters of a randomized section drawn from text
+        doc_chunk_size = 1000 # Size in characters of a randomized section drawn from text
         
         # Generate one question
         # eval_pair is a dict with keys "question" and "answer"
@@ -294,11 +294,21 @@ def run_evaluator(
 
     # Convert dataframe to dict
     d_dict = d.to_dict('records')
-    if len(d_dict) == 1:
-        yield json.dumps({"data":  d_dict[0]})
-    else:
+    if len(d_dict) == 0:
         logger.warn(
             "A QA pair was not evaluated correctly. Skipping this pair.")
+    else:
+        for dt in d_dict:
+            yield json.dumps({"data": dt})
+    # if len(d_dict) == 1:
+    #     logger.warn(json.dumps({"data":  d_dict[0]}))
+    #     logger.warn("Yielded a grade!!!")
+        
+    # else:
+    #     logger.warn(json.dumps({"data":  d_dict[0]}))
+    #     logger.warn(
+    #         "A QA pair was not evaluated correctly. Skipping this pair.")
+        
 
 
 @app.post("/evaluator-stream")

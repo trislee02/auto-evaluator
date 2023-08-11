@@ -1,16 +1,19 @@
 import openai
 import json
 
-PROMPT = """You are a smart assistant designed to help high school teachers come up with reading comprehension questions. 
-Given a piece of text, you must come up with a question and answer pair than can be used to test a student's reading comprehension abilities.
-When coming up with this question-answer pair, you must respond in the following format:
+PROMPT = """You are a smart assistant designed to help teachers come up with questions for a final Computer Science test.
+Given a piece of text, you must come up with a clear and detailed question and answer pair than can be used to test a student.
+When coming up with this question-answer pair, you must respond in the following JSON format:
 ```
 {
     "question": "$YOUR_QUESTION_HERE",
-    "answer": "$THE_ANSWER_HERE",
+    "answer": "$THE_ANSWER_HERE"
 }
 ```
-Everything between the ``` must be valid json."""
+Remember:
+++ Your response must be a valid json. 
+++ Do not mention the tutorial.
+++ When giving a question regarding code, add the code snippet in the question if applicable"""
 
 class QAGenerator:
     def __init__(self, api_base, azure_openai_key, engine):
@@ -25,7 +28,10 @@ class QAGenerator:
         Generate a question-answer pair from text.
         If the llm response is not in json type, raise JSONDecodeError
         """
-        user_content = f"""Text: {text}"""
+        user_content = f"""Text:
+<text>
+{text}
+</text>"""
         response = openai.ChatCompletion.create(
             engine=self.engine,
             messages = [{"role":"system","content": PROMPT},
