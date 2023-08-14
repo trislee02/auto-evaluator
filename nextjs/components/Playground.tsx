@@ -675,7 +675,7 @@ const Playground = ({ form }: { form: Form }) => {
                     <th>Question</th>
                     <th>Expected Answer</th>
                     <th>Observed Answer</th>
-                    <th>Retrieval Relevancy Score</th>
+                    {/* <th>Retrieval Relevancy Score</th> */}
                     <th>Answer Similarity Score</th>
                     <th>Latency (s)</th>
                   </tr>
@@ -686,7 +686,7 @@ const Playground = ({ form }: { form: Form }) => {
                       <td>{result?.question}</td>
                       <td>{result?.answer}</td>
                       <td>{result?.result}</td>
-                      <td style={{ whiteSpace: "pre-wrap" }}>
+                      {/* <td style={{ whiteSpace: "pre-wrap" }}>
                         {isFastGradingPrompt ? (
                           renderPassFail(result.retrievalScore)
                         ) : (
@@ -706,7 +706,7 @@ const Playground = ({ form }: { form: Form }) => {
                             {result?.retrievalScore.justification}
                           </Spoiler>
                         )}
-                      </td>
+                      </td> */}
                       <td style={{ whiteSpace: "pre-wrap" }}>
                         {isFastGradingPrompt ? (
                           renderPassFail(result?.answerScore)

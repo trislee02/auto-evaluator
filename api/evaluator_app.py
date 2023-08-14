@@ -257,20 +257,17 @@ def run_evaluator(
         # Randomly select a file
         file_index = random.randint(0, len(fnames)-1)
         text = texts[file_index]
-
-        doc_chunk_size = 1000 # Size in characters of a randomized section drawn from text
         
         # Generate one question
         # eval_pair is a dict with keys "question" and "answer"
         if i < len(test_dataset):
             eval_pair = test_dataset[i]
         else:
-            eval_pair = generate_one_eval_pair(qa_generator, text, doc_chunk_size, logger)
+            eval_pair = generate_one_eval_pair(qa_generator, text, chunk_chars, logger)
             if eval_pair == None:
                 # Error in eval generation
                 logger.warn("A QA pair was not generated correctly. Skipping this pair.")
                 continue
-        logger.info(f"Generated a question answer pair: {eval_pair['question']} ||| {eval_pair['answer']}")
         eval_set.append(eval_pair)
         i += 1
         
